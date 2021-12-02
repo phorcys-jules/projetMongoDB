@@ -1,0 +1,45 @@
+networks:
+ demo.net:
+  driver: bridge
+ backend.net:
+  driver: bridge
+
+services:
+ demo.php:
+ container_name: demo.php.2020
+ image: canals/php:latest
+ ports:
+  - "12080:80"
+  - "12443:443"
+ volumes:
+  - ./public:/var/www/html
+  - ./src:/var/www/src
+ working_dir: /var/www/src
+ networks:
+  - demo.net
+ depends_on:
+ - demo.mongodb
+ 
+ demo.mongodb:
+ image: mongo:latest
+ volumes :
+  - ./data:/var/data
+ working_dir: /var/data
+ networks:
+  demo.net:
+    aliases:
+      - mongo.local
+ backend.net:
+ aliases:
+  - mongo
+ demo.mongo-express:
+ image: mongo-express:latest
+ networks
+:
+ - backend.net
+ ports
+:
+ - "8081:8081"
+ depends_on
+:
+ - demo.mongod

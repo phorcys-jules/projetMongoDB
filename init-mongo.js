@@ -1,3 +1,4 @@
+/*
 db.createUser (
     {
         user : "jfrancois",
@@ -9,4 +10,4 @@ db.createUser (
             }
         ]
     }
-)
+)*/
