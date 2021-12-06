@@ -7,4 +7,4 @@
 
 mongo-volume/
 data/
-src/vendor/
+src/back/vendor/

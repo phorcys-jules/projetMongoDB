@@ -6,6 +6,10 @@ require_once "./vendor/autoload.php" ;
 $c = new \MongoDB\Client();
 echo "connected to mongo <br>";
 
+foreach ($c->listDatabases() as $databaseInfo) {
+   var_dump($databaseInfo);
+}
+
 // select a database
 $db = $c->firstmongodb;
 
@@ -16,6 +20,7 @@ $collection = $db->createCollection("mycol4");
 echo "Collection created succsessfully <br>";
 */
 $collection = $db->mycol;
+
 
 $document = array( 
     "title" => "truc", 

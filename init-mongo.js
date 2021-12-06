@@ -1,4 +1,4 @@
-/*
+
 db.createUser (
     {
         user : "jfrancois",
@@ -6,8 +6,8 @@ db.createUser (
         roles : [
             {
                 role : "readWrite",
-                db : "firstmongodb"
+                db : "villeNancy"
             }
         ]
     }
-)*/
+)
