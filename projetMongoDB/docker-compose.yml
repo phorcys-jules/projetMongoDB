@@ -4,11 +4,20 @@ services:
     image: 'mongo'
     container_name: 'mongo-docker'
     environment:
-      - MONGO_INITDB_DATABASE=firstmongodb
-      - MONGO_INITDB_USERNAME= root
-      - MONGO_INITDB_PASSWORD= rootpassword
+      - MONGO_INITDB_DATABASE=admin
+      - MONGO_INITDB_USERNAME=root
+      - MONGO_INITDB_PASSWORD=rootpassword
     volumes:
       - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
       - ./mongo-volume:/data/db
     ports:
       - '27017-27019:27017-27019'
+  node:
+    image: node:lts
+    env_file: ./.env
+    working_dir: /usr/src/app
+    volumes:
+      - ./src/api:/usr/src/app
+    ports:
+      - 8795:8795
+    command: 'bash -c "npm install && npm start"'
