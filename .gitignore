@@ -9,3 +9,4 @@ mongo-volume/
 data/
 src/back/vendor/
 projetMongoDB/src/api/node_modules/
+projetMongoDB/node_modules

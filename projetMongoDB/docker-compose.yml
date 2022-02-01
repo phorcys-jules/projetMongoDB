@@ -2,9 +2,9 @@ version: '3'
 services:
   database:
     image: 'mongo'
-    container_name: 'mongo-docker'
+    container_name: 'projetMongo_db'
     environment:
-      - MONGO_INITDB_DATABASE=admin
+      - MONGO_INITDB_DATABASE=villeNancy
       - MONGO_INITDB_USERNAME=root
       - MONGO_INITDB_PASSWORD=rootpassword
     volumes:
@@ -12,12 +12,28 @@ services:
       - ./mongo-volume:/data/db
     ports:
       - '27017-27019:27017-27019'
-  node:
-    image: node:lts
-    env_file: ./.env
-    working_dir: /usr/src/app
-    volumes:
-      - ./src/api:/usr/src/app
-    ports:
-      - 8795:8795
-    command: 'bash -c "npm install && npm start"'
+    networks:
+      - projetMongo
+
+# Can't link node & mongo through Docker 
+#  node:
+#    container_name: projetMongo_node
+#    restart: always
+#    image: node:lts
+#    env_file: ./.env
+#    working_dir: /usr/src/app
+#    volumes:
+#      - ./src/api:/usr/src/app
+#    ports:
+#      - 8795:8795
+#    networks:
+#      - projetMongo
+#    links:
+#      - database
+#    depends_on:
+#      - database
+#    command: 'bash -c "npm install && npm start"'
+
+networks:
+  projetMongo:
+    driver: bridge
